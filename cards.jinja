@@ -6,8 +6,22 @@
 {%- set N=6 -%}
 {%- set open_steps = [6, 2, 0] -%}
 {%- set close_steps = [2, 4, 6] -%}
-{%- for roller, a in roller_flip.items() -%}
-{% for s in open_steps %}
+{%- for roller, a in roller_flip.items() %}
+    - name: {{ roller }}
+      entity: {{ roller }}
+      hold_action: more-info
+      tap_action:
+        action: fire-dom-event
+        browser_mod:
+          service: browser_mod.popup
+          data:
+            title: {{ roller }}
+            hide_header: false
+            autoclose: true
+            content:
+              type: grid
+              cards:
+{%- for s in open_steps %}
                 - entity: {{ roller}}
                   show_name: false
                   type: button
