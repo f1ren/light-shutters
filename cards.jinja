@@ -1,0 +1,16 @@
+{%- set roller_flip = {'cover.salon_roller': 33} -%}
+{%- set N=6 -%}
+{%- set open_steps = [2] -%}
+{%- for roller, flip in roller_flip.items() -%}
+{% for i in open_steps %}
+                - entity: {{ roller}}
+                  show_name: false
+                  type: button
+                  tap_action:
+                    action: call-service
+                    service: cover.set_cover_position
+                    data:
+                      position: 100
+                      entity_id: cover.southern_roller
+{%- endfor -%}
+{%- endfor -%}
