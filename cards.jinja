@@ -1,8 +1,13 @@
-{%- set roller_flip = {'cover.salon_roller': 33} -%}
+{%- set roller_flip = {
+'cover.salon_roller': 38,
+'cover.kitchen_eastern_roller': 38,
+'cover.vitrina_roller': 33,
+} -%}
 {%- set N=6 -%}
-{%- set open_steps = [2] -%}
-{%- for roller, flip in roller_flip.items() -%}
-{% for i in open_steps %}
+{%- set open_steps = [6, 2, 0] -%}
+{%- set close_steps = [2, 4, 6] -%}
+{%- for roller, a in roller_flip.items() -%}
+{% for s in open_steps %}
                 - entity: {{ roller}}
                   show_name: false
                   type: button
@@ -10,7 +15,8 @@
                     action: call-service
                     service: cover.set_cover_position
                     data:
-                      position: 100
-                      entity_id: cover.southern_roller
+                      position: {{ (a + s * (100 - a) / (N - 0))|round|int }}
+                      entity_id: {{ roller}}
+                  icon: fapro:shutter-6-open-{{ s }}
 {%- endfor -%}
 {%- endfor -%}
