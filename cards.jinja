@@ -4,6 +4,8 @@
 'cover.vitrina_roller': 33,
 } -%}
 {%- set N=6 -%}
+{%- set FIRST_OPEN_STEP=1 -%}
+{%- set FIRST_CLOSE_STEP=1 -%}
 {%- set open_steps = [6, 2, 0] -%}
 {%- set close_steps = [2, 4, 6] -%}
 {%- for roller, a in roller_flip.items() %}
@@ -29,8 +31,20 @@
                     action: call-service
                     service: cover.set_cover_position
                     data:
-                      position: {{ (a + s * (100 - a) / (N - 0))|round|int }}
+                      position: {{ (a + s * (100 - a) / (N - FIRST_OPEN_STEP))|round|int }}
                       entity_id: {{ roller}}
                   icon: fapro:shutter-6-open-{{ s }}
+{%- endfor -%}
+{%- for s in close_steps %}
+                - entity: {{ roller}}
+                  show_name: false
+                  type: button
+                  tap_action:
+                    action: call-service
+                    service: cover.set_cover_position
+                    data:
+                      position: {{ (a + (s - FIRST_CLOSE_STEP) * (0 - a) / (N - FIRST_CLOSE_STEP))|round|int }}
+                      entity_id: {{ roller}}
+                  icon: fapro:shutter-6-close-{{ s }}
 {%- endfor -%}
 {%- endfor -%}
