@@ -2,11 +2,15 @@
 'cover.salon_roller': 38,
 'cover.kitchen_eastern_roller': 38,
 'cover.vitrina_roller': 33,
+'cover.parents_northern_roller': 41,
+'cover.parents_eastern_roller': 45,
+'cover.northern_roller': 38,
+'cover.southern_roller': 37
 } -%}
 {%- set N=6 -%}
 {%- set FIRST_OPEN_STEP=0 -%}
 {%- set FIRST_CLOSE_STEP=1 -%}
-{%- set CLOSE_OFFSET=7 -%}
+{%- set CLOSE_OFFSET=5 -%}
 {%- set open_steps = [6, 2, 0] -%}
 {%- set close_steps = [3, 4, 5, 6] -%}
 {%- for roller, a in roller_flip.items() -%}
