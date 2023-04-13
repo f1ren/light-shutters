@@ -31,8 +31,7 @@
               type: grid
               cards:
 {%- for s in open_steps %}
-                - entity: {{ roller}}
-                  show_name: false
+                - show_name: false
                   type: button
                   tap_action:
                     action: call-service
@@ -43,8 +42,7 @@
                   icon: fapro:shutter-6-open-{{ s }}
 {%- endfor -%}
 {%- for s in close_steps %}
-                - entity: {{ roller}}
-                  show_name: false
+                - show_name: false
                   type: button
                   tap_action:
                     action: call-service
